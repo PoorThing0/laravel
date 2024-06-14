@@ -20,7 +20,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\CatalogController;
 
-Route::get('/catalog', [CatalogController::class, 'index']);
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+
 
 use App\Http\Controllers\CartController;
 

@@ -14,14 +14,15 @@ class ProductSeeder extends Seeder
                                                                         //4 => 'Пицца'
                                                                         //5 => 'Суши'
                                                                         //6 => 'Дополнительно'
+                                                                        //php artisan db:seed --class=ProductSeeder 
     public function run()
     {
         Product::create([
-            'name' => 'Феникс',
-            'description' => 'Тунец, стружка тунца, сыр сливочный, сырный соус, соус унаги, кунжут белый',
-            'price' => 339,
-            'image' => 'roll1.png',
-            'category_id' => 2
+            'name' => 'Сет Исключительный',
+            'description' => 'Филе лосося, пикантные нотки унаги и свежий зеленый лук. Царственное удовольствие!',
+            'price' => 959,
+            'image' => 'set1.png',
+            'category_id' => 3
         ]);
     }
 }

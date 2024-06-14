@@ -8,3 +8,49 @@
 @import 'variables';
 
 // Custom Styles
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.scrollable-description {
+    height: 100px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+.scrollable-description::-webkit-scrollbar {
+    width: 1px;
+}
+.scrollable-description::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.scrollable-description::-webkit-scrollbar-thumb {
+    background: #88888873;
+}
+.scrollable-description::-webkit-scrollbar-thumb:hover {
+    background: #5555557c;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: inherit;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+.price-text {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-body .btn {
+    margin-left: 10px;
+}
