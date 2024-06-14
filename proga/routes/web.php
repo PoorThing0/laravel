@@ -21,3 +21,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 use App\Http\Controllers\CatalogController;
 
 Route::get('/catalog', [CatalogController::class, 'index']);
+
+use App\Http\Controllers\CartController;
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');

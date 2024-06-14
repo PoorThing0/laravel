@@ -13,10 +13,9 @@ class ProductSeeder extends Seeder
             'name' => 'Кола',
             'description' => 'Лимонад Добрый Кола',
             'price' => 149,
-            'image' => '//public/images/water1.png',
+            'image' => 'water1.png',
             'category_id' => 1
         ]);
-        
     }
 }
 
