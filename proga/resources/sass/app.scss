@@ -15,15 +15,16 @@
     text-overflow: ellipsis;
 }
 .scrollable-description {
-    height: 100px;
+    height: 72px;
     overflow-y: auto;
     padding-right: 10px;
     margin-top: -5px;
     margin-bottom: 10px;
 }
 .scrollable-description::-webkit-scrollbar {
-    width: 1px;
+    width: 2px;
 }
+
 .scrollable-description::-webkit-scrollbar-track {
     background: #f1f1f1;
 }

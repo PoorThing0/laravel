@@ -7,6 +7,13 @@
     <div class="row">
         <div class="col-md-8">
             <h2>Ваша корзина</h2>
+
+            @if ($errors->has('promo_code'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('promo_code') }}
+                </div>
+            @endif
+
             <table class="table">
                 <thead>
                     <tr>
@@ -25,7 +32,6 @@
                         <td>{{ $cartItem->product->name }}</td>
                         <td>{{ $cartItem->product->price }}₽</td>
                         <td>
-                            <!-- Форма для обновления количества товара -->
                             <form action="{{ route('cart.update', ['id' => $cartItem->id]) }}" method="POST" class="d-flex">
                                 @csrf
                                 <input type="number" name="quantity" value="{{ $cartItem->quantity }}" class="form-control mr-2" style="width: 80px;">
@@ -34,7 +40,6 @@
                         </td>
                         <td>{{ $cartItem->product->price * $cartItem->quantity }}₽</td>
                         <td>
-                            <!-- Кнопка для удаления товара из корзины -->
                             <form action="{{ route('cart.delete', ['id' => $cartItem->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -47,11 +52,32 @@
                 <tfoot>
                     <tr>
                         <td colspan="4"><strong>Общая стоимость</strong></td>
-                        <td><strong>{{ $totalPrice }}₽</strong></td>
+                        <td><strong>{{ number_format($totalPrice, 2) }}₽</strong></td>
                         <td></td>
                     </tr>
+                    @if(isset($promo_applied) && $promo_applied)
+                    <tr>
+                        <td colspan="4"><strong>Скидка ({{ $discount }}%)</strong></td>
+                        <td><strong>{{ number_format($discountAmount, 2) }}₽</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><strong>Итоговая стоимость</strong></td>
+                        <td><strong>{{ number_format($finalPrice, 2) }}₽</strong></td>
+                        <td></td>
+                    </tr>
+                    @endif
                 </tfoot>
             </table>
+
+            <!-- Форма для применения промокода -->
+            <form action="{{ route('cart.apply-promo') }}" method="POST" class="d-flex mt-3">
+                @csrf
+                <input type="text" name="promo_code" class="form-control" placeholder="Введите промокод">
+                <button type="submit" class="btn btn-success ml-2">Применить промокод</button>
+            </form>
+
+            <button class="btn btn-primary mt-3">Оформить заказ</button>
         </div>
     </div>
 </div>

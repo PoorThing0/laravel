@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\CartItem;
+use App\Models\PromoCode;
 
 class CartController extends Controller
 {
@@ -18,6 +19,8 @@ class CartController extends Controller
         return view('cart.index', [
             'cartItems' => $cartItems,
             'totalPrice' => $totalPrice,
+            'discount' => null,
+            'finalPrice' => $totalPrice
         ]);
     }
 
@@ -60,29 +63,6 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Количество товара в корзине обновлено.');
     }
 
-
-    private function calculateTotalPrice($cartItems)
-    {
-        $totalPrice = 0;
-
-        foreach ($cartItems as $cartItem) {
-            $totalPrice += $cartItem->product->price * $cartItem->quantity;
-        }
-
-        return $totalPrice;
-    }
-    public function updateQuantity(Request $request, $id)
-    {
-        $request->validate([
-            'quantity' => 'required|numeric|min:1',
-        ]);
-
-        $cartItem = CartItem::findOrFail($id);
-        $cartItem->quantity = $request->quantity;
-        $cartItem->save();
-
-        return redirect()->route('cart.index')->with('success', 'Количество успешно обновлено.');
-    }
     public function delete($id)
     {
         $cartItem = CartItem::findOrFail($id);
@@ -90,4 +70,40 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Товар успешно удален из корзины.');
     }
+
+    public function applyPromoCode(Request $request)
+{
+    $request->validate([
+        'promo_code' => 'required|string',
+    ]);
+
+    $promoCode = PromoCode::where('code', $request->input('promo_code'))
+                          ->where('is_active', true)
+                          ->first();
+
+    if (!$promoCode) {
+        return redirect()->route('cart.index')->withErrors(['promo_code' => 'Неверный или неактивный промокод.']);
+    }
+
+    $discount = $promoCode->discount_percentage; // Получаем процент скидки
+    $cartItems = auth()->user()->cartItems;
+    $totalPrice = $this->calculateTotalPrice($cartItems);
+
+    $discountAmount = ($totalPrice * $discount) / 100; // Вычисляем сумму скидки
+    $finalPrice = $totalPrice - $discountAmount; // Вычисляем итоговую стоимость
+
+    return view('cart.index', compact('cartItems', 'totalPrice', 'discount', 'discountAmount', 'finalPrice'))->with('promo_applied', true);
+}
+
+private function calculateTotalPrice($cartItems)
+{
+    $totalPrice = 0;
+
+    foreach ($cartItems as $cartItem) {
+        $totalPrice += $cartItem->product->price * $cartItem->quantity;
+    }
+
+    return $totalPrice;
+}
+
 }

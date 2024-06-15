@@ -15,14 +15,15 @@ class ProductSeeder extends Seeder
                                                                         //5 => 'Суши'
                                                                         //6 => 'Дополнительно'
                                                                         //php artisan db:seed --class=ProductSeeder 
+                                                                        //Product::where('name', '')->delete();
     public function run()
     {
         Product::create([
-            'name' => 'Сет Исключительный',
-            'description' => 'Филе лосося, пикантные нотки унаги и свежий зеленый лук. Царственное удовольствие!',
-            'price' => 959,
-            'image' => 'set1.png',
-            'category_id' => 3
+            'name' => 'Комбо 4 пиццы: 30см',
+            'description' => 'Для тех, кто любит сытно!',
+            'price' => 1785,
+            'image' => 'piz7.png',
+            'category_id' => 4
         ]);
     }
 }
