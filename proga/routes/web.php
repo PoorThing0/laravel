@@ -45,5 +45,7 @@ Route::post('promo-codes', [AdminController::class, 'store'])->name('admin.promo
 
 Route::get('admin/products', [AdminController::class, 'products'])->name('admin.products');
 Route::delete('products/{id}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+Route::get('admin/products/create', [AdminController::class, 'createProduct'])->name('admin.products.create');
+Route::post('admin/products', [AdminController::class, 'storeProduct'])->name('admin.products.store');
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\PromoCode;
+use App\Models\Category; // Добавлен импорт модели Category
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -58,5 +59,38 @@ class AdminController extends Controller
         $product->delete();
 
         return redirect()->route('admin.products')->with('success', 'Товар успешно удалён');
+    }
+
+    public function createProduct()
+    {
+        $categories = Category::all();
+        return view('admin.create-product', compact('categories'));
+    }
+
+    public function storeProduct(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        
+        $imageName = $request->file('image')->getClientOriginalName();
+
+        $imagePath = $request->file('image')->storeAs('public/images', $imageName);
+
+        $product = new Product([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'price' => $request->input('price'),
+            'image' => $imageName,
+        ]);
+
+        $product->save();
+
+        return redirect()->route('admin.products')->with('success', 'Товар успешно создан');
     }
 }
