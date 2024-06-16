@@ -39,5 +39,7 @@ Route::post('/cart/apply-promo', [CartController::class, 'applyPromoCode'])->nam
 use App\Http\Controllers\Admin\AdminController;
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::delete('promo-codes/{id}', [AdminController::class, 'destroy'])->name('admin.promo-codes.destroy');
+Route::patch('promo-codes/{id}/toggle', [AdminController::class, 'toggleActivation'])->name('admin.promo-codes.toggle');
 
 

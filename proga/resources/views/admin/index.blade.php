@@ -1,5 +1,3 @@
-<!-- resources/views/admin/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('title', 'Административная панель')
@@ -19,6 +17,7 @@
                             <th>Активен</th>
                             <th>Дата создания</th>
                             <th>Дата обновления</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,9 +26,30 @@
                                 <td>{{ $promoCode->id }}</td>
                                 <td>{{ $promoCode->code }}</td>
                                 <td>{{ $promoCode->discount_percentage }}</td>
-                                <td>{{ $promoCode->is_active ? 'Да' : 'Нет' }}</td>
+                                <td>
+                                    @if($promoCode->is_active)
+                                        <span class="badge badge-success">Активен</span>
+                                    @else
+                                        <span class="badge badge-secondary">Неактивен</span>
+                                    @endif
+                                </td>
                                 <td>{{ $promoCode->created_at }}</td>
                                 <td>{{ $promoCode->updated_at }}</td>
+                                <td>
+                                    <form action="{{ route('admin.promo-codes.toggle', $promoCode->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-sm {{ $promoCode->is_active ? 'btn-warning' : 'btn-success' }}">
+                                            {{ $promoCode->is_active ? 'Деактивировать' : 'Активировать' }}
+                                        </button>
+                                    </form>
+                                    
+                                    <form action="{{ route('admin.promo-codes.destroy', $promoCode->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Вы уверены, что хотите удалить этот промокод?')">Удалить</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
