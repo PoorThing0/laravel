@@ -43,4 +43,7 @@ Route::delete('promo-codes/{id}', [AdminController::class, 'destroy'])->name('ad
 Route::patch('promo-codes/{id}/toggle', [AdminController::class, 'toggleActivation'])->name('admin.promo-codes.toggle');
 Route::post('promo-codes', [AdminController::class, 'store'])->name('admin.promo-codes.store');
 
+Route::get('admin/products', [AdminController::class, 'products'])->name('admin.products');
+Route::delete('products/{id}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+
 

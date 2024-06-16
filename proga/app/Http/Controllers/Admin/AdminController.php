@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\PromoCode;
 use Illuminate\Http\Request;
 
@@ -38,11 +39,24 @@ class AdminController extends Controller
             'discount_percentage' => 'required|numeric|between:0,100',
         ]);
 
-        // Всегда устанавливаем is_active в false (0)
         $validated['is_active'] = 0;
 
         PromoCode::create($validated);
 
         return redirect()->route('admin.index')->with('success', 'Промокод успешно создан');
+    }
+    
+    public function products()
+    {
+        $products = Product::all();
+        return view('admin.products', compact('products'));
+    }
+
+    public function destroyProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin.products')->with('success', 'Товар успешно удалён');
     }
 }

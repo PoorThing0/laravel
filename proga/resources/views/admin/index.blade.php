@@ -7,7 +7,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Административная панель</h2>
-                
+
+                <a href="{{ route('admin.products') }}" class="btn btn-primary mb-3">Настройка товаров</a>
+
                 <h3>Список промокодов</h3>
                 <table class="table">
                     <thead>
