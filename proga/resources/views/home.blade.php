@@ -13,48 +13,45 @@
                         Узнайте о наших акциях!
                     </p>
                 </div>
+                <div id="carouselExampleControls" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="http://127.0.0.1:8000/catalog?category=Пицца"><img src="{{ asset('storage/images/slid1.jpg') }}" class="d-block w-100" alt="Slide 1"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="http://127.0.0.1:8000/catalog?category=Сеты"><img src="{{ asset('storage/images/slid2.jpg') }}" class="d-block w-100" alt="..."></a>
+            </div>
+            <div class="carousel-item">
+                <a href="https://youtu.be/ueCUtaN5144"><img src="{{ asset('storage/images/slid3.jpg') }}" class="d-block w-100" alt="..."></a>
+            </div>
+        </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
 
                 <div class="text-center">
                     <a href="{{ route('catalog.index') }}" class="btn btn-primary mt-3">Перейти в каталог</a>
                 </div>
             </div>
         </div>
-    <div class="fixed-bottom text-center mb-3">
-        <button id="show-video-btn" class="btn btn-link btn-small-video" data-bs-toggle="modal" data-bs-target="#videoModal" title="Устроиться к нам">
-            ?
-        </button>
     </div>
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel">Устроиться к нам</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="video-container">
-                        <iframe id="videoFrame" class="embed-responsive-item" src="https://www.youtube.com/embed/ueCUtaN5144" allowfullscreen width=750px height=400px></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 @endsection
-
-
 
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var videoModal = document.getElementById('videoModal');
-            var videoFrame = document.getElementById('videoFrame');
-
-            videoModal.addEventListener('hidden.bs.modal', function () {
-                videoFrame.src = "";
-            });
-
-            videoModal.addEventListener('show.bs.modal', function () {
-                videoFrame.src = "https://www.youtube.com/embed/ueCUtaN5144";
+            var myCarousel = document.getElementById('carouselExampleControls');
+            new bootstrap.Carousel(myCarousel, {
+                interval: 2000, // Интервал между слайдами в миллисекундах (необязательно)
+                wrap: true // Позволяет слайдеру циклически перемещаться (необязательно)
             });
         });
     </script>

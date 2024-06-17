@@ -62,7 +62,6 @@
                 if (this.value === 'delivery') {
                     deliveryAddressGroup.style.display = 'block';
 
-                    // Создание карты OpenStreetMap
                     if (!map) {
                         map = L.map('map').setView([55.751244, 37.618423], 13);
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -71,7 +70,6 @@
 
                         let marker;
 
-                        // Обработчик клика по карте
                         map.on('click', function (e) {
                             if (marker) {
                                 map.removeLayer(marker);
