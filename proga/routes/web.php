@@ -49,3 +49,13 @@ Route::get('admin/products/create', [AdminController::class, 'createProduct'])->
 Route::post('admin/products', [AdminController::class, 'storeProduct'])->name('admin.products.store');
 
 
+use App\Http\Controllers\OrderController;
+
+Route::get('/checkout', [OrderController::class, 'showCheckoutPage'])->name('checkout');
+Route::post('/checkout', [OrderController::class, 'placeOrder'])->name('order.place');
+Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+
+
+
+

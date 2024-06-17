@@ -77,7 +77,8 @@
                 <button type="submit" class="btn btn-success ml-2">Применить промокод</button>
             </form>
 
-            <button class="btn btn-primary mt-3">Оформить заказ</button>
+            <button class="btn btn-primary mt-3"><a href="{{ route('checkout') }}" class="btn btn-primary mt-3">Оформить заказ</a>
+            </button>
         </div>
     </div>
 </div>
