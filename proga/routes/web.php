@@ -57,5 +57,10 @@ Route::get('/order/create', [OrderController::class, 'create'])->name('order.cre
 Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
 
 
+use App\Http\Controllers\UserProfileController;
+
+Route::get('/profile', [UserProfileController::class, 'profile'])->name('profile');
+
+
 
 

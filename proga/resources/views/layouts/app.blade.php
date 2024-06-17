@@ -10,7 +10,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">Главная</a>
+                <a class="navbar-brand" href="{{ url('/') }}">DOSTAVAKA</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,11 +28,21 @@
                             <button class="btn btn-outline-success me-2" onclick="window.location.href='{{ url('/login') }}'">Вход</button>
                             <button class="btn btn-outline-primary" onclick="window.location.href='{{ url('/register') }}'">Регистрация</button>
                         @else
-                            <span class="navbar-text me-2">{{ Auth::user()->name }}</span>
-                            <button class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle me-2" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Профиль</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <button class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</button>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         @endguest
                     </div>
                 </div>

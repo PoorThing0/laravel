@@ -16,10 +16,16 @@ class Order extends Model
         'delivery_type',
         'delivery_address',
         'total_price',
+        'status',
     ];
 
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_email', 'email');
     }
 }

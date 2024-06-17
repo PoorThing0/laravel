@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -66,6 +67,7 @@ class OrderController extends Controller
 
         CartItem::truncate();
 
-        return redirect()->route('order.create')->with('success', 'Заказ успешно оформлен.');
+        // Перенаправление на страницу профиля пользователя
+        return redirect()->route('profile')->with('success', 'Заказ успешно оформлен.');
     }
 }
