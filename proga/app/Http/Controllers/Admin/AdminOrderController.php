@@ -12,7 +12,7 @@ class AdminOrderController extends Controller
     {
         $orders = Order::all();
 
-        return view('admin.orders.index', ['orders' => $orders]);
+        return view('admin.orders', ['orders' => $orders]);
     }
 
 }

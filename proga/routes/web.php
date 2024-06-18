@@ -64,7 +64,7 @@ Route::get('/profile', [UserProfileController::class, 'profile'])->name('profile
 
 use App\Http\Controllers\Admin\AdminOrderController;
 
-Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+Route::get('admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
 
 
 
