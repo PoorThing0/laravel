@@ -7,6 +7,10 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Список заказов</h2>
+            
+                <div class="mt-4">
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Назад</a>
+                </div>
 
                 <table class="table">
                     <thead>

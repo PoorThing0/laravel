@@ -8,8 +8,11 @@
             <div class="col-md-12">
                 <h2>Настройка товаров</h2>
 
-                <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-3">Добавить товар</a>
+                <!-- Кнопка "Назад" после заголовка -->
+                <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">Назад</a>
 
+                <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-3">Добавить товар</a>
+                
                 <table class="table">
                     <thead>
                         <tr>
