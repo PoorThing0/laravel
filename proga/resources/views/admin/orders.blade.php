@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Список заказов')
+@section('title-block', 'Список заказов')
 
 @section('content')
     <div class="container">

@@ -9,7 +9,7 @@ class PromoCodesTableSeeder extends Seeder
 {
     public function run()
     {
-        PromoCode::truncate(); // Очистка таблицы перед заполнением
+        PromoCode::truncate();
 
         PromoCode::create([
             'code' => 'SKIDKA10',

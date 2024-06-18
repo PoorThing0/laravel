@@ -85,12 +85,12 @@ class CartController extends Controller
         return redirect()->route('cart.index')->withErrors(['promo_code' => 'Неверный или неактивный промокод.']);
     }
 
-    $discount = $promoCode->discount_percentage; // Получаем процент скидки
+    $discount = $promoCode->discount_percentage;
     $cartItems = auth()->user()->cartItems;
     $totalPrice = $this->calculateTotalPrice($cartItems);
 
-    $discountAmount = ($totalPrice * $discount) / 100; // Вычисляем сумму скидки
-    $finalPrice = $totalPrice - $discountAmount; // Вычисляем итоговую стоимость
+    $discountAmount = ($totalPrice * $discount) / 100;
+    $finalPrice = $totalPrice - $discountAmount;
 
     return view('cart.index', compact('cartItems', 'totalPrice', 'discount', 'discountAmount', 'finalPrice'))->with('promo_applied', true);
 }

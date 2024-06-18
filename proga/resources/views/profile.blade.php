@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Профиль пользователя')
+@section('title-block', 'Профиль пользователя')
 
 @section('content')
     <div class="container mt-4">

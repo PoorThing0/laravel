@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Административная панель')
+@section('title-block', 'Административная панель')
 
 @section('content')
     <div class="container">

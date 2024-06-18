@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\PromoCode;
-use App\Models\Category; // Добавлен импорт модели Category
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

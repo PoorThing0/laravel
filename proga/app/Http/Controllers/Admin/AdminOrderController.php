@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order; // Убедитесь, что этот use-инструкция правильно указывает на модель Order
+use App\Models\Order;
 
 class AdminOrderController extends Controller
 {
