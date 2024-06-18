@@ -70,7 +70,6 @@
                 </tfoot>
             </table>
 
-            <!-- Форма для применения промокода -->
             <form action="{{ route('cart.apply-promo') }}" method="POST" class="d-flex mt-3">
                 @csrf
                 <input type="text" name="promo_code" class="form-control" placeholder="Введите промокод">

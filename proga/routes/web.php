@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 use App\Http\Controllers\CatalogController;
 
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
@@ -55,6 +56,7 @@ Route::get('/checkout', [OrderController::class, 'showCheckoutPage'])->name('che
 Route::post('/checkout', [OrderController::class, 'placeOrder'])->name('order.place');
 Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
 Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
 
 
 use App\Http\Controllers\UserProfileController;
@@ -67,5 +69,12 @@ use App\Http\Controllers\Admin\AdminOrderController;
 Route::get('admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
 
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestEmail;
+
+Route::get('/test-email', function () {
+    Mail::to('nazarets2005@yandex.ru')->send(new TestEmail());
+    return 'Test email sent';
+});
 
 

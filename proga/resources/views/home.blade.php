@@ -50,9 +50,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             var myCarousel = document.getElementById('carouselExampleControls');
             new bootstrap.Carousel(myCarousel, {
-                interval: 2000, // Интервал между слайдами в миллисекундах (необязательно)
-                wrap: true // Позволяет слайдеру циклически перемещаться (необязательно)
+                interval: 2000,
+                wrap: true 
             });
         });
     </script>
 @endsection
+

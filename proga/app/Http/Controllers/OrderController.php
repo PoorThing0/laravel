@@ -6,7 +6,10 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlacedCustomer;
+use App\Mail\OrderPlacedAdmin;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -22,7 +25,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        // Проверка на наличие товаров в корзине перед оформлением заказа
         $cartItems = CartItem::all();
         if ($cartItems->isEmpty()) {
             return redirect()->route('order.create')->withErrors(['cart' => 'Ваша корзина пуста.']);
@@ -44,7 +46,6 @@ class OrderController extends Controller
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
-
         $order = Order::create([
             'user_name' => $validated['user_name'],
             'phone' => $validated['phone'],
@@ -67,7 +68,13 @@ class OrderController extends Controller
 
         CartItem::truncate();
 
-        // Перенаправление на страницу профиля пользователя
+        Mail::to($validated['email'])->send(new OrderPlacedCustomer($order));
+
+        $admins = User::where('is_admin', 1)->pluck('email');
+        foreach ($admins as $adminEmail) {
+            Mail::to($adminEmail)->send(new OrderPlacedAdmin($order));
+        }
+
         return redirect()->route('profile')->with('success', 'Заказ успешно оформлен.');
     }
 }
