@@ -11,6 +11,9 @@
                 <a href="{{ route('admin.products') }}" class="btn btn-primary mb-3">Настройка товаров</a>
                 <a href="{{ url('/admin/orders') }}" class="btn btn-secondary mb-3">Список заказов</a>
                 
+                <h3>Слайды</h3>
+                <a href="{{ route('admin.slides.index') }}" class="btn btn-info mb-3">Управление слайдами</a>
+
                 <h3>Список промокодов</h3>
                 <table class="table">
                     <thead>

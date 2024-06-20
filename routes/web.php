@@ -77,4 +77,14 @@ Route::get('/test-email', function () {
     return 'Test email sent';
 });
 
+use App\Http\Controllers\SlideController;
+
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+    Route::resource('slides', SlideController::class)->except(['show', 'edit', 'update']);
+});
+Route::get('/', [SlideController::class, 'indexhome'])->name('home');
+
+
+
+
 
