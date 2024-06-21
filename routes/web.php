@@ -87,6 +87,22 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 Route::get('/', [SlideController::class, 'indexhome'])->name('home');
 
 
+use App\Http\Controllers\Courier\CourierAuthController;
+use App\Http\Controllers\Courier\CourierOrderController;
+
+Route::prefix('courier')->name('courier.')->group(function () {
+    Route::get('register', [CourierAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('register', [CourierAuthController::class, 'register']);
+    Route::get('login', [CourierAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [CourierAuthController::class, 'login']);
+    Route::post('logout', [CourierAuthController::class, 'logout'])->name('logout');
+
+    Route::middleware('auth:courier')->group(function () {
+        Route::get('orders', [CourierOrderController::class, 'index'])->name('orders');
+        Route::put('orders/{order}/delivered', [CourierOrderController::class, 'markAsDelivered'])->name('orders.delivered');
+    });
+});
+
 
 
 

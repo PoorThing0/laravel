@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'courier' => [
+            'driver' => 'session',
+            'provider' => 'couriers',
+        ],
     ],
 
     /*
@@ -65,10 +70,10 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'couriers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Courier::class,
+        ],
     ],
 
     /*
@@ -97,6 +102,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'couriers' => [
+            'provider' => 'couriers',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -111,5 +123,4 @@ return [
     */
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
-
 ];

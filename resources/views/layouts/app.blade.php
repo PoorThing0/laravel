@@ -22,6 +22,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/cart') }}">Корзина</a>
                         </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle ms-2" type="button" id="courierDropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Курьерам
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="courierDropdownMenuButton">
+                                    @guest('courier')
+                                    <li><a class="dropdown-item" href="{{ route('courier.login') }}">Вход для курьеров</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('courier.register') }}">Регистрация для курьеров</a></li>
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ route('courier.orders') }}">Заказы курьера</a></li>
+                                    @endguest
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                     <div class="d-flex">
                         @guest
@@ -53,5 +68,7 @@
     <div class="container mt-4">
         @yield('content')
     </div>
+
+    <script type="module" src="{{ mix('resources/js/app.js') }}"></script>
 </body>
 </html>
