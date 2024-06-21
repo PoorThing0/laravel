@@ -12,6 +12,11 @@ class UserProfileController extends Controller
     public function profile()
     {
         $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
         $orders = Order::where('email', $user->email)->orderByDesc('created_at')->get();
 
         return view('profile', compact('user', 'orders'));

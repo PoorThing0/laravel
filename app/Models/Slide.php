@@ -9,6 +9,5 @@ class Slide extends Model
 {
     use HasFactory;
 
-    // Разрешаем массовое заполнение атрибутов
     protected $fillable = ['image', 'link'];
 }
