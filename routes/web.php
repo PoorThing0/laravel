@@ -67,6 +67,8 @@ Route::get('/profile', [UserProfileController::class, 'profile'])->name('profile
 use App\Http\Controllers\Admin\AdminOrderController;
 
 Route::get('admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+Route::put('admin/orders/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
 
 
 use Illuminate\Support\Facades\Mail;
