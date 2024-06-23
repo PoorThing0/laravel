@@ -70,10 +70,8 @@ class OrderController extends Controller
 
         Mail::to($validated['email'])->send(new OrderPlacedCustomer($order));
 
-        $admins = User::where('is_admin', 1)->pluck('email');
-        foreach ($admins as $adminEmail) {
-            Mail::to($adminEmail)->send(new OrderPlacedAdmin($order));
-        }
+
+        Mail::to('nazarets844@gmail.com')->send(new OrderPlacedAdmin($order));
 
         return redirect()->route('profile')->with('success', 'Заказ успешно оформлен.');
     }
